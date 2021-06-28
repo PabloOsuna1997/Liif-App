@@ -7,7 +7,7 @@ import './App.css'
 
 
 import  Providers  from './pages/Providers'
-import { FormCredit } from './pages/FormCredit'
+import  FormCredit  from './pages/FormCredit'
 import { CalculatorCredits } from './pages/CalculatorCredits'
 
 const initialValue = {
