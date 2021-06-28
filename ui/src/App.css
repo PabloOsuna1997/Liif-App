@@ -90,3 +90,13 @@ button:hover {
   float: left;
   width: 240px;
 }
+
+
+.cardio {
+  box-shadow: 0 4px 8px 0 rgba(65, 83, 248, 0.5);
+  transition: 0.3s;
+}
+
+.card{
+  opacity: .9;
+}

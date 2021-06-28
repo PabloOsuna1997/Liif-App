@@ -5,7 +5,7 @@ import { Table } from 'react-bootstrap';
 const TableTheme = ( { ProviderSelected }) => {
     return (
         ProviderSelected != undefined ?
-        <Table striped bordered hover>
+        <Table striped bordered hover className="cardio">
             <thead>
                 <tr>
                     <th>Componente</th>
@@ -20,10 +20,6 @@ const TableTheme = ( { ProviderSelected }) => {
                 <tr>
                     <td>generalFont</td>
                     <td>{ProviderSelected.generalFont}</td>
-                </tr>
-                <tr>
-                    <td>logoUrl</td>
-                    <td>{ProviderSelected.logoUrl}</td>
                 </tr>
                 <tr>
                     <td>fontColor</td>

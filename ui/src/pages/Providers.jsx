@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Container, Row, Col, Spinner, Table, Form, Button, Dropdown } from 'react-bootstrap';
+import { Container, Row, Col, Spinner, Table, Form, Button, Dropdown, Card} from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux'
 import Select from '../components/Select';
@@ -19,13 +19,13 @@ const Providers = ({ addProviders, addData, addFields }) => {
         axios.get(`http://localhost:3000/`)
             .then(res => {
                 setProviders(res.data.providers);
-                addProviders(res.data.providers);
             })
     }, [])
 
 
     const onSelectHandler = (event) => {
-        if (event != undefined) {
+        if (event != undefined) {            
+            addProviders(Providers[Number(event)]);
             setProviderSelect(Providers[Number(event)])
             //hacer peticion
             if (event == 0) {
@@ -46,10 +46,15 @@ const Providers = ({ addProviders, addData, addFields }) => {
         }
     }
 
+    const handlerSubmit = () => {
+        history.push('/credits')
+    }
+
     return (
-        <Container className="justify-content-md-center">
+        <Card style={{width: '90%', marginLeft: '6em'}}>
+            <Container style={{marginTop:'5%', marginBottom:'2em'}} >
             <Row className="justify-content-md-center">
-                <Col>
+                <Col  lg="2" sm={8}>
                     <span>Proveedor de Credito</span>
                     {
                         Providers.length > 0 ?
@@ -62,11 +67,11 @@ const Providers = ({ addProviders, addData, addFields }) => {
                     }
                 </Col>
             </Row>
-            <Row>
+            <Row style={{marginTop:'8%', position:'relative'}}>
 
                 {
                     (ProviderSelect.providerCode != undefined) ?
-                        <Col xs={6}>
+                        <Col xs={5}>
                             <span>Tema:</span>
                             <TableTheme ProviderSelected={ProviderSelect.theme} />
 
@@ -76,16 +81,23 @@ const Providers = ({ addProviders, addData, addFields }) => {
                 }
                 {
                     (ProviderFields.providerCode != undefined) ?
-                        < Col xs={6}>
-                            < span > Campos:</span>
-                            <TableFields ProviderFields={ProviderFields} />
-                        </Col>
+                        <section>
+                            < Col xs={6}>
+                                < span > Campos:</span>
+                                <TableFields ProviderFields={ProviderFields} />
+                            </Col>
+
+                            <Button variant="primary" style={{ marginLeft: "1em" , marginTop:'1em'}} onClick={handlerSubmit}>
+                                Guardar
+                            </Button>
+                        </section>
                         :
                         null
                 }
             </Row >
         </Container >
-    );
+        </Card>
+   );
 }
 
 const mapStateProps = dispatchEvent => {

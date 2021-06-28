@@ -11,7 +11,7 @@ import { FormCredit } from './pages/FormCredit'
 import { CalculatorCredits } from './pages/CalculatorCredits'
 
 const initialValue = {
-    providers: [],
+    provider: {},
     fields: {}
 };
 
