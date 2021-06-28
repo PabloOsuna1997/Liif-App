@@ -2,6 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 let jsonProviders = require('./providers.json');
+let jsonAlChilazo = require('./AlChilazo.json');
+let jsonCreditosYa = require('./creditosya.json');
 const app = express();
 
 app.use(morgan('dev'));
@@ -14,6 +16,14 @@ app.set('port', process.env.PORT || 3000);
 app.get('/', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(jsonProviders));
+});
+app.get('/alchilazo', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(jsonAlChilazo));
+});
+app.get('/creditosya', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(jsonCreditosYa));
 });
 
 app.listen(app.get('port'), () => {

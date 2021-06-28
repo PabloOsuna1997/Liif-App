@@ -9,7 +9,7 @@ const Select = ({ ProviderSelect, providers, onSelectHandler }) => {
                 {
                     ProviderSelect != undefined ?
                     ProviderSelect.providerCode :
-                        "Seleccione Tipo de Operador"
+                    "Seleccione Tipo de Operador"
                 }
             </Dropdown.Toggle>
             <Dropdown.Menu>
