@@ -1,0 +1,67 @@
+{
+    "providers": [
+        {
+            "providerCode": "AlChilazo",
+            "providerName": "Créditos al chilazo",
+            "theme": {
+                "headerBackgroundColor": "red",
+                "generalFont": "Sans-Serif",
+                "logoUrl": "https://via.placeholder.com/100/0000FF/808080?text=Al+Chilazo",
+                "fontColor": "black",
+                "fontSizes": {
+                    "title": "1.2rem",
+                    "subTitle": "1rem",
+                    "label": "0.9rem",
+                    "paragraph": "0.9rem"
+                }
+            },
+            "loanCalculation": {
+                "loanTypes":
+                    ["Hipotecario",
+                        "Fiduciario",
+                        "Automovil"],
+                "rates": {
+                    "Hipotecario": "0.07",
+                    "Fiduciario": "0.17",
+                    "Automovil": "0.09"
+                },
+                "maxAmounts": {
+                    "Hipotecario": "500000",
+                    "Fiduciario": "100000",
+                    "Automovil": "200000"
+                },
+                "terms": [6, 12, 18, 24, 36, 60]
+            }
+        },
+        {
+            "providerCode": "CreditosYa",
+            "providerName": "Créditos Ya",
+            "theme": {
+                "headerBackgroundColor": "gray",
+                "generalFont": "Arial",
+                "logoUrl": "https://via.placeholder.com/100/FFFF00/000000?text=Creditos+Ya",
+                "fontColor": "blue",
+                "fontSizes": {
+                    "title": "1.5rem",
+                    "subTitle": "1.2rem",
+                    "label": "1rem",
+                    "paragraph": "1rem"
+                }
+            },
+            "loanCalculation": {
+                "loanTypes":
+                    ["Fiduciario",
+                        "Automovil"],
+                "rates": {
+                    "Fiduciario": "0.23",
+                    "Automovil": "0.12"
+                },
+                "maxAmounts": {
+                    "Fiduciario": "90000",
+                    "Automovil": "175000"
+                },
+                "terms": [6, 12, 18, 24, 36, 48, 60, 84, 96, 120]
+            }
+        }
+    ]
+}

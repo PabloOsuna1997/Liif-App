@@ -1,0 +1,82 @@
+{
+    "providerCode": "CreditosYa",
+    "formCode": "precalificacion",
+    "formTitle": "Precalifica con nosotros y obten tu pisto ya!",
+    "fields": [
+        {
+            "code": "Name",
+            "title": "Nombres",
+            "type": "text",
+            "maxLenght": 150,
+            "required": true
+        },
+        {
+            "code": "LastName",
+            "title": "Apellidos",
+            "type": "text",
+            "maxLenght": 150,
+            "required": true
+        },
+        {
+            "code": "IdNumber",
+            "title": "Identificación",
+            "type": "text",
+            "maxLenght": 15,
+            "required": true
+        },
+        {
+            "code": "Gender",
+            "title": "Genero",
+            "type": "select",
+            "required": true,
+            "options": [
+                {
+                    "value": "M",
+                    "text": "Masculino"
+                },
+                {
+                    "value": "F",
+                    "text": "Femenino"
+                }
+            ]
+        },
+        {
+            "code": "Income",
+            "title": "Ingresos mensuales",
+            "type": "number",
+            "maxLenght": 25,
+            "required": true
+        },
+        {
+            "code": "Address",
+            "title": "Direccion",
+            "type": "textarea",
+            "maxLenght": 2000,
+            "required": false
+        },
+        {
+            "code": "Country",
+            "title": "Pais de residencia",
+            "type": "select",
+            "options": [
+                {
+                    "value": "GT",
+                    "text": "Guatemala"
+                },
+                {
+                    "value": "ES",
+                    "text": "El Salvador"
+                },
+                {
+                    "value": "HN",
+                    "text": "Honduras"
+                },
+                {
+                    "value": "NI",
+                    "text": "Nicaragua"
+                }
+            ],
+            "required": true
+        }
+    ]
+}
