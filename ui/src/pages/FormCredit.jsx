@@ -1,17 +1,22 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Table, Alert, InputGroup, DropdownButton, Navbar, Container, Col, Row, Dropdown, FormControl } from 'react-bootstrap';
+import { Card, Table, Alert, InputGroup, DropdownButton, Navbar, Container, Col, Row, Dropdown, FormControl, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import SelectCredit from '../components/SelectCredit'
+import TableCuotes from '../components/TableCuotes'
+import CardCalc from '../components/CardCalc'
+import { useHistory } from 'react-router';
 
 
-const FormCredit = ({ providers }) => {
+const FormCredit = ({ providers, addData }) => {
+    const history = useHistory();
     const [Rate, setRate] = useState(0)
     const [type, setType] = useState('');
     const [AmountAllow, setAmountAllow] = useState(true)
     const [Terms, setTerms] = useState(0)
     const [Amount, setAmount] = useState(0)
     const [Monthly, setMonthly] = useState(0)
+    const [OK, setOK] = useState(false)
 
 
     const handleSelect = (e) => {
@@ -78,7 +83,7 @@ const FormCredit = ({ providers }) => {
         }
     }
 
-    const a = () => {
+    const cuotes = () => {
         const items = []
         let saldo = 0;
         let totalCuota = 0;
@@ -114,9 +119,34 @@ const FormCredit = ({ providers }) => {
         return items
     }
 
+    const handlerSubmit = () => {
+        if (type != "" && Monthly != 0 && Rate != 0 && Terms != 0) {
+            setOK(false)
+            const data = {
+                type: type,
+                monthly: Number(Monthly),
+                rate: Number(Rate),
+                term: Number(Terms)
+            }
+
+            addData(data)
+
+
+            history.push('/calculator')
+        } else {
+            setOK(true)
+        }
+    }
+
     return (
-        <>
-            <Navbar style={{ background: providers.theme.headerBackgroundColor }}>
+        <div style={{
+            color: providers.theme.fontColor,
+            fontFamily: providers.theme.generalFont
+        }}>
+            <Navbar
+                style={{
+                    background: providers.theme.headerBackgroundColor
+                }}>
                 <Navbar.Brand href="#home">
                     <img
                         alt=""
@@ -128,97 +158,49 @@ const FormCredit = ({ providers }) => {
                     {providers.providerName}
                 </Navbar.Brand>
             </Navbar>
+            <Row
+                className="justify-content-md-center"
+                style={{
+                    marginTop: '4em'
+                }}>
+                <Col >
+                    {
+                        providers != undefined ?
 
-            <Container>
-                <Row className="justify-content-md-center" style={{ marginTop: '4em' }}>
-                    <Col lg="6" style={{ alignContent: 'center' }}>
-                        <span style={{ marginLeft: '20%' }}>CALCULADORA</span>
-                        {!AmountAllow && (
-                            <Alert
-                                width='9em'
-                                className="mt-4 align-middle"
-                                variant="danger"
-                                onClose={() => setAmountAllow(false)}
-                                dismissible
-                                style={{ fontSize: "0.9em", color: "black" }}
-                            >
-                                <p>Monto no permitido por el tipo de Credito.</p>
-                            </Alert>
-                        )}
-                    </Col>
-                </Row>
-                <Row className="justify-content-md-center" style={{ marginTop: '4em' }}>
-                    <Col sm={4}>
-                        <DropdownButton
-                            alignRight
-                            title={type != "" ? type : "Seleccion tipo de credito"}
-                            id="dropdown-menu-align-center"
-                            onSelect={handleSelect}>
-                            {
-                                providers.loanCalculation.loanTypes != undefined ?
-                                    renderTypes(providers.loanCalculation.loanTypes) : null
-                            }
-                        </DropdownButton>
-                    </Col>
-                    <Col sm={6} style={{ marginLeft: '2em' }}>
-                        <span>Tasa del tipo de credito: {Rate}%</span>
-                    </Col>
-                </Row>
-                <Row className="justify-content-md-center" style={{ marginTop: '4em' }}>
-                    <Col sm={4}>
-                        <span>Monto del Credito</span>
-                        <InputGroup className="mb-3">
-                            <InputGroup.Text>$</InputGroup.Text>
-                            <FormControl aria-label="Amount (to the nearest dollar)" onChange={e => handleAmount(e)} />
-                            <InputGroup.Text>.00</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-                    <Col sm={6} style={{ marginLeft: '2em' }}>
-                        <span>Plazo del Credito</span>
-                        <DropdownButton
-                            alignRight
-                            title={Terms != "" ? Terms : "Seleccion tipo de credito"}
-                            id="dropdown-menu-align-center"
-                            onSelect={handleSelectTerms}>
-                            {
-                                providers.loanCalculation.terms != undefined ?
-                                    renderTerms(providers.loanCalculation.terms) : null
-                            }
-                        </DropdownButton>
-                    </Col>
-                </Row>
-            </Container>
-
-            <Container>
-                <Row className="justify-content-md-center" style={{ marginTop: '2em' }}>
-                    <Col xs lg="4">
-                        <h2>
-                            Cuota Mensual:  Q{Monthly}
-                        </h2>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <Table  striped bordered hover size="sm">
-                            <thead>
-                                <tr>
-                                    <th>Mes</th>
-                                    <th>Capital</th>
-                                    <th>Interes</th>
-                                    <th>Total Cuota</th>
-                                    <th>Saldo</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    a()
-                                }
-                            </tbody>
-                        </Table>
-                    </Col>
-                </Row>
-            </Container>
-        </>
+                            <CardCalc providers={providers}
+                                AmountAllow={AmountAllow}
+                                setAmountAllow={setAmountAllow}
+                                type={type}
+                                handleSelect={handleSelect}
+                                renderTypes={renderTypes}
+                                Rate={Rate}
+                                handleAmount={handleAmount}
+                                Terms={Terms}
+                                handleSelectTerms={handleSelectTerms}
+                                renderTerms={renderTerms}
+                                handlerSubmit={handlerSubmit} />
+                            :
+                            null
+                    }
+                    
+                    { OK && (
+                        <Alert
+                            width='9em'
+                            className="mt-4 align-middle"
+                            variant="danger"
+                            onClose={() => setOK(false)}
+                            dismissible
+                            style={{ fontSize: "0.9em", color: "black" }}
+                        >
+                            <p >Porfavor eliga una opcion en todos los campos.</p>
+                        </Alert>
+                    )}
+                </Col>
+                <Col>
+                    <TableCuotes Monthly={Monthly} cuotes={cuotes} />
+                </Col>
+            </Row>
+        </div>
     )
 }
 
@@ -226,6 +208,15 @@ FormCredit.propTypes = {
 
 }
 
-const mapStateToProps = state => ({ providers: state.providers })
+const mapStateProps = state => ({ providers: state.providers })
 
-export default connect(mapStateToProps)(FormCredit);
+
+const mapStateToProps = dispatchEvent => {
+    return {
+        addData: (value) => {
+            dispatchEvent({ type: 'ADD_DATA', payload: value })
+        }
+    }
+}
+
+export default connect(mapStateProps, mapStateToProps)(FormCredit);

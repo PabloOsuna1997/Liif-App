@@ -4,8 +4,8 @@ import { Dropdown } from 'react-bootstrap'
 
 const Select = ({ ProviderSelect, providers, onSelectHandler }) => {
     return (
-        <Dropdown onSelect={(ev) => onSelectHandler(ev)}>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
+        <Dropdown  onSelect={(ev) => onSelectHandler(ev)}>
+            <Dropdown.Toggle variant="dark" id="dropdown-basic">
                 {
                     ProviderSelect != undefined ?
                     ProviderSelect.providerCode :

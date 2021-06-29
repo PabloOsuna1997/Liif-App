@@ -8,11 +8,12 @@ import './App.css'
 
 import  Providers  from './pages/Providers'
 import  FormCredit  from './pages/FormCredit'
-import { CalculatorCredits } from './pages/CalculatorCredits'
+import  CalculatorCredits  from './pages/CalculatorCredits'
 
 const initialValue = {
     provider: {},
-    fields: {}
+    fields: {},
+    data: {}
 };
 
 const reducer = (state = initialValue, action) => {
@@ -21,6 +22,8 @@ const reducer = (state = initialValue, action) => {
             return {providers: action.payload}
         case 'ADD_FIELDS':
             return {...state, fields: action.payload}
+        case 'ADD_DATA':
+                return {...state, data: action.payload}
         case "RESET":
                 return initialValue;        
         default:            

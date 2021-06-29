@@ -87,7 +87,7 @@ const Providers = ({ addProviders, addData, addFields }) => {
                                 <TableFields ProviderFields={ProviderFields} />
                             </Col>
 
-                            <Button variant="primary" style={{ marginLeft: "1em" , marginTop:'1em'}} onClick={handlerSubmit}>
+                            <Button variant="dark" style={{ marginLeft: "1em" , marginTop:'1em'}} onClick={handlerSubmit}>
                                 Guardar
                             </Button>
                         </section>
