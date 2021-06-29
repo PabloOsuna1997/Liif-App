@@ -90,7 +90,7 @@ const CalculatorCredits = ({ fields, providers }) => {
         }
         console.log(data);
 
-        let res = await axios.post('http://localhost:3000/addrequest', data);
+        let res = await axios.post('http://18.118.253.240:3000/addrequest', data);
         let response = res.data;
         console.log(response);
     }

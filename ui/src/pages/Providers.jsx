@@ -16,7 +16,7 @@ const Providers = ({ addProviders, addData, addFields }) => {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/`)
+        axios.get(`http://18.118.253.240:3000/`)
             .then(res => {
                 setProviders(res.data.providers);
             })
@@ -29,18 +29,18 @@ const Providers = ({ addProviders, addData, addFields }) => {
             setProviderSelect(Providers[Number(event)])
             //hacer peticion
             if (event == 0) {
-                axios.get(`http://localhost:3000/alchilazo`)
-                    .then(res => {
+                axios.get(`http://18.118.253.240:3000/alchilazo`)
+                    .then(res => {                        
+                        console.log("alchilazo", res.data)
                         setProviderFields(res.data);
                         addFields(res.data)
-                        console.log("alchilazo", res.data)
                     })
             } else {
-                axios.get(`http://localhost:3000/creditosya`)
+                axios.get(`http://18.118.253.240:3000/creditosya`)
                     .then(res => {
+                        console.log("creditos ya", res.data)
                         setProviderFields(res.data);
                         addFields(res.data)
-                        console.log("creditos ya", res.data)
                     })
             }
         }
