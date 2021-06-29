@@ -26,4 +26,22 @@ body {
   padding: 15px 15px 15px 15px;
 }
 
+.inputs{
+  width: 20em;
+  margin: 5px;
+  margin-left: 5em;
+  margin-top: 1em;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  border-color: whitesmoke;
+}
 
+.selects{
+  width: 20em;
+  margin: 5px;
+  margin-left: 5em;
+  margin-top: 1em;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  border-color: whitesmoke;
+}

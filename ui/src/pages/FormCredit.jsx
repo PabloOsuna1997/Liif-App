@@ -29,6 +29,7 @@ const FormCredit = ({ providers, addData }) => {
         }
         setType(e)
     }
+    
     const handleSelectTerms = (e) => {
         setTerms(e)
         console.log("cuota mensual", Amount, Rate, Terms)
@@ -42,6 +43,7 @@ const FormCredit = ({ providers, addData }) => {
 
         return loanTypes.map(render)
     }
+    
     const renderTerms = (Terms) => {
         const render = Term => (
             <Dropdown.Item eventKey={Term}>{Term}</Dropdown.Item>
