@@ -94,7 +94,7 @@ const CalculatorCredits = ({ fields, providers, resetDataRedux }) => {
         }
         console.log(data);
 
-        let res = await axios.post('http://localhost:3000/addrequest', data);
+        let res = await axios.post('http://18.118.253.240:3000/addrequest', data);
         if (res.status === 200) {
             setOK(true)
             //resetDataRedux()
