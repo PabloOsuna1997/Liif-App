@@ -40,7 +40,7 @@ const App = () => {
         <div className="page-container">
             <Provider store={store}>
                 <Card style={{
-                    height: '55em'
+                    height: '60em'
                 }}>
                     <Router>
                         <Switch>

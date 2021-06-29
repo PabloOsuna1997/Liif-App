@@ -53,3 +53,7 @@ svg{
 a{
   color:'white'
 }
+
+.cuotestables{
+  height: 30em; overflow: auto;
+}

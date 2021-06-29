@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Card, Table, Alert, InputGroup, DropdownButton, Navbar, Container, Col, Row, Dropdown, FormControl } from 'react-bootstrap';
 
 const TableCuotes = ({ Monthly, cuotes }) => {
-    
+
     return (<Card style={{
         position: 'relative',
         width: '80%'
@@ -17,22 +17,24 @@ const TableCuotes = ({ Monthly, cuotes }) => {
         </Row>
         <Row>
             <Col>
-                <Table striped bordered hover size="sm" >
-                    <thead>
-                        <tr>
-                            <th>Mes</th>
-                            <th>Capital</th>
-                            <th>Interes</th>
-                            <th>Total Cuota</th>
-                            <th>Saldo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            cuotes()
-                        }
-                    </tbody>
-                </Table>
+                <div className="cuotestables">
+                    <Table striped bordered hover >
+                        <thead>
+                            <tr>
+                                <th>Mes</th>
+                                <th>Capital</th>
+                                <th>Interes</th>
+                                <th>Total Cuota</th>
+                                <th>Saldo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                cuotes()
+                            }
+                        </tbody>
+                    </Table>
+                </div>
             </Col>
         </Row>
     </Card>
