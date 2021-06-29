@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { Navbar, Card, Container, Row, Col, Spinner, Table, Form, Button, Dropdown } from 'react-bootstrap';
+import { Alert, Navbar, Card, Container, Row, Col, Spinner, Table, Form, Button, Dropdown } from 'react-bootstrap';
 import axios from 'axios'
 
-const CalculatorCredits = ({ fields, providers }) => {
+const CalculatorCredits = ({ fields, providers, resetDataRedux }) => {
+
+    const [OK, setOK] = useState(false)
+    const history = useHistory();
 
     const renderOptions = (options) => {
         const items = []
@@ -85,14 +89,19 @@ const CalculatorCredits = ({ fields, providers }) => {
                 Gender: document.getElementById("Gender").value,
                 Income: document.getElementById("Income").value,
                 Address: document.getElementById("Address").value,
-                Country: document.getElementById("Country") != null ? document.getElementById("Country").value : ""
+                Country: document.getElementById("Country") != null ? document.getElementById("Country").value : "GT"
             }
         }
         console.log(data);
 
-        let res = await axios.post('http://18.118.253.240:3000/addrequest', data);
-        let response = res.data;
-        console.log(response);
+        let res = await axios.post('http://localhost:3000/addrequest', data);
+        if (res.status === 200) {
+            setOK(true)
+            //resetDataRedux()
+            setTimeout(function(){ history.replace('/'); }, 1000);
+            
+        }
+
     }
 
     return (
@@ -153,7 +162,20 @@ const CalculatorCredits = ({ fields, providers }) => {
                         Enviar Solicitud
                     </Button>
                 </form>
+                {OK && (
+                    <Alert
+                        width='9em'
+                        className="mt-4 align-middle"
+                        variant="success"
+                        onClose={() => setOK(false)}
+                        dismissible
+                        style={{ fontSize: "0.9em", color: "black" }}
+                    >
+                        <p >Solicitud de credito registrada con exito.</p>
+                    </Alert>
+                )}
             </Card>
+
         </>
     )
 }
@@ -164,4 +186,12 @@ CalculatorCredits.propTypes = {
 
 const mapStateProps = state => ({ fields: state.fields, providers: state.providers })
 
-export default connect(mapStateProps)(CalculatorCredits)
+const mapStateToProps = dispatchEvent => {
+    return {
+        resetDataRedux: (value) => {
+            dispatchEvent({ type: 'RESET', payload: value })
+        }
+    }
+}
+
+export default connect(mapStateProps,mapStateToProps)(CalculatorCredits)

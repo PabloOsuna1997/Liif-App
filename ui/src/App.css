@@ -45,3 +45,11 @@ body {
   background-color: whitesmoke;
   border-color: whitesmoke;
 }
+
+svg{
+  margin-left: 1em;
+}
+
+a{
+  color:'white'
+}

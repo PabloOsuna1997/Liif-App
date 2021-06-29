@@ -1,14 +1,16 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { BrowserRouter as Router, Switch, Route  } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { Card} from 'react-bootstrap';
 import './App.css'
 
 
-import  Providers  from './pages/Providers'
-import  FormCredit  from './pages/FormCredit'
-import  CalculatorCredits  from './pages/CalculatorCredits'
+import Providers from './pages/Providers'
+import FormCredit from './pages/FormCredit'
+import CalculatorCredits from './pages/CalculatorCredits'
+import Footer from './components/Footer';
 
 const initialValue = {
     provider: {},
@@ -19,31 +21,38 @@ const initialValue = {
 const reducer = (state = initialValue, action) => {
     switch (action.type) {
         case 'ADD_PROVIDER':
-            return {providers: action.payload}
+            return { providers: action.payload }
         case 'ADD_FIELDS':
-            return {...state, fields: action.payload}
+            return { ...state, fields: action.payload }
         case 'ADD_DATA':
-                return {...state, data: action.payload}
+            return { ...state, data: action.payload }
         case "RESET":
-                return initialValue;        
-        default:            
+            return initialValue;
+        default:
             return state;
     }
 }
-const store = createStore(reducer,   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 
 const App = () => {
     return (
-        <Provider store={store}>
-            <Router>
-                <Switch>
-                    <Route exact path="/"><Providers/></Route>
-                    <Route exact path="/credits"><FormCredit/></Route>
-                    <Route exact path="/calculator"><CalculatorCredits/></Route>
-                </Switch>
-            </Router>
-        </Provider>
+        <div className="page-container">
+            <Provider store={store}>
+                <Card style={{
+                    height: '55em'
+                }}>
+                    <Router>
+                        <Switch>
+                            <Route exact path="/"><Providers /></Route>
+                            <Route exact path="/credits"><FormCredit /></Route>
+                            <Route exact path="/calculator"><CalculatorCredits /></Route>
+                        </Switch>
+                    </Router>
+                </Card>
+                <Footer />
+            </Provider>
+        </div>
     )
 }
 
